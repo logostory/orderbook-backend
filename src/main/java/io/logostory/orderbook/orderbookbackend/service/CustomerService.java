@@ -13,13 +13,16 @@ public class CustomerService {
 
     public Customer addCustomer(Customer customer) {
 
+        return customer;
     }
 
     public Customer updateCustomer(Customer customer) {
 
+        return customer;
     }
 
     public boolean deleteCustomer(Long id) {
 
+        return false;
     }
 }
