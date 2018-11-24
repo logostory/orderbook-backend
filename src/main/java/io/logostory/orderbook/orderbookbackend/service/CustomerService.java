@@ -21,7 +21,7 @@ public class CustomerService {
     }
 
     public CustomerDTO find(Long id) {
-        Optional<Customer> dto = customerRepository.findOne(writeBuilder(id));
+        Optional<Customer> dto = customerRepository.findById(id);
         return CustomerDTO.of(dto.orElseGet(Customer::new));
     }
 
@@ -32,7 +32,7 @@ public class CustomerService {
 
     public boolean update(CustomerDTO customerDTO) {
         Customer customer = customerRepository.save(Customer.of(customerDTO));
-        if(customer.getCustomerId().equals(customerDTO.getCustomerId())){
+        if(customer.getCustomerId() == customerDTO.getCustomerId()){
             return true;
         }
         return false;
@@ -44,9 +44,9 @@ public class CustomerService {
     }
 
 
-    private BooleanBuilder writeBuilder(Long customerId) {
-        BooleanBuilder builder = new BooleanBuilder();
+    private BooleanBuilder writeBuilder(long customerId) {
         QCustomer qCustomer = QCustomer.customer;
+        BooleanBuilder builder = new BooleanBuilder();
         builder.and(qCustomer.customerId.eq(customerId));
 
         return builder;
