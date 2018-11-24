@@ -1,5 +1,7 @@
 package io.logostory.orderbook.orderbookbackend.api;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.logostory.orderbook.orderbookbackend.domain.Customer;
 import io.logostory.orderbook.orderbookbackend.domain.dto.CustomerDTO;
 import io.logostory.orderbook.orderbookbackend.service.CustomerService;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -27,13 +30,13 @@ public class CustomerControllerTest {
     @MockBean
     private CustomerService service;
 
+    private ObjectMapper mapper = new ObjectMapper();
+
     @Test
-    public void normalCase() throws Exception {
+    public void normalReadCase() throws Exception {
         //given
         Long customerId = 1L;
-        CustomerDTO mockDTO = new CustomerDTO();
-        mockDTO.setCustomerId(customerId);
-        mockDTO.setName("customerName");
+        CustomerDTO mockDTO = getMockCustomerDTO(customerId);
         when(service.find(customerId)).thenReturn(mockDTO);
 
         //when
@@ -45,9 +48,8 @@ public class CustomerControllerTest {
                 .andExpect(status().isOk());
     }
 
-
     @Test
-    public void wrongCase() throws Exception {
+    public void wrongReadCase() throws Exception {
         //given
         Long customerId = -1L;
 
@@ -60,7 +62,32 @@ public class CustomerControllerTest {
                 .andExpect(status().isBadRequest());
 
         // and
-        verify(service,never()).find(customerId);
+        verify(service, never()).find(customerId);
+    }
+
+    @Test
+    public void normalWriteCase() throws Exception {
+        //given
+        Long customerId = 1L;
+        CustomerDTO mockDTO = getMockCustomerDTO(customerId);
+        String json = mapper.writeValueAsString(mockDTO);
+        when(service.save(any())).thenReturn(new Customer());
+
+        //when
+        ResultActions results = mockMvc.perform(post("/customer")
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8));
+
+        // then
+        results.andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
+    }
+
+    private CustomerDTO getMockCustomerDTO(Long customerId) {
+        CustomerDTO mockDTO = new CustomerDTO();
+        mockDTO.setCustomerId(customerId);
+        mockDTO.setName("customerName");
+        return mockDTO;
     }
 
 }

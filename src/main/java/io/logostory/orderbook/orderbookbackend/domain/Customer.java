@@ -1,5 +1,6 @@
 package io.logostory.orderbook.orderbookbackend.domain;
 
+import io.logostory.orderbook.orderbookbackend.domain.dto.CustomerDTO;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,4 +19,11 @@ public class Customer {
 
     private String customerName;
 
+
+    public static Customer of(CustomerDTO customerDTO){
+        Customer customer = new Customer();
+        customer.customerId = customerDTO.getCustomerId();
+        customer.customerName = customerDTO.getName();
+        return customer;
+    }
 }

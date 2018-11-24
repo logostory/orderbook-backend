@@ -8,7 +8,6 @@ import io.logostory.orderbook.orderbookbackend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Service
@@ -18,17 +17,22 @@ public class CustomerService {
     CustomerRepository customerRepository;
 
     public CustomerDTO find(Long id) {
-        Optional<Customer> dto = customerRepository.findOne(builder(id));
+        Optional<Customer> dto = customerRepository.findOne(writeBuilder(id));
         return CustomerDTO.of(dto.orElseGet(Customer::new));
     }
 
+    public Customer save(CustomerDTO customerDTO) {
+        return customerRepository.save(Customer.of(customerDTO));
+
+    }
 
 
-    private BooleanBuilder builder(@NotNull Long customerId) {
+    private BooleanBuilder writeBuilder(Long customerId) {
         BooleanBuilder builder = new BooleanBuilder();
         QCustomer qCustomer = QCustomer.customer;
         builder.and(qCustomer.customerId.eq(customerId));
 
         return builder;
     }
+
 }
