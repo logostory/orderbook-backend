@@ -16,8 +16,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -36,7 +35,7 @@ public class CustomerControllerTest {
     public void normalReadCase() throws Exception {
         //given
         Long customerId = 1L;
-        CustomerDTO mockDTO = getMockCustomerDTO(customerId);
+        CustomerDTO mockDTO = getMockCustomerDTO();
         when(service.find(customerId)).thenReturn(mockDTO);
 
         //when
@@ -68,8 +67,7 @@ public class CustomerControllerTest {
     @Test
     public void normalWriteCase() throws Exception {
         //given
-        Long customerId = 1L;
-        CustomerDTO mockDTO = getMockCustomerDTO(customerId);
+        CustomerDTO mockDTO = getMockCustomerDTO();
         String json = mapper.writeValueAsString(mockDTO);
         when(service.save(any())).thenReturn(new Customer());
 
@@ -83,9 +81,44 @@ public class CustomerControllerTest {
                 .andExpect(status().isOk());
     }
 
-    private CustomerDTO getMockCustomerDTO(Long customerId) {
+    @Test
+    public void normalUpdateCase() throws Exception {
+        //given
+        CustomerDTO mockDTO = getMockCustomerDTO();
+        String json = mapper.writeValueAsString(mockDTO);
+        when(service.update(any())).thenReturn(true);
+
+        //when
+        ResultActions results = mockMvc.perform(put("/customer")
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON_UTF8));
+
+        // then "logging"
+        results.andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void normalDeleteCase() throws Exception {
+        //given
+        Long customerId = 1L;
+
+        //when
+        ResultActions results = mockMvc.perform(delete("/customer/" + customerId)
+                .contentType(MediaType.APPLICATION_JSON_UTF8));
+
+        // then "logging"
+        results.andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk());
+
+        // and
+        verify(service, only()).delete(customerId);
+    }
+
+    private CustomerDTO getMockCustomerDTO() {
         CustomerDTO mockDTO = new CustomerDTO();
-        mockDTO.setCustomerId(customerId);
+        mockDTO.setCustomerId(1L);
         mockDTO.setName("customerName");
         return mockDTO;
     }

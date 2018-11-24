@@ -40,4 +40,30 @@ public class CustomerApi {
         return ResponseEntity.ok(customer.getCustomerId() + "등록이 완료되었습니다 :) ");
     }
 
+    @PutMapping(path = "/customer")
+    public ResponseEntity<String> update(@RequestBody CustomerDTO customerDTO) {
+        if (customerDTO == null) {
+            return ResponseEntity.status(400).build();
+        }
+
+        boolean isSuccess = customerService.update(customerDTO);
+
+        if(isSuccess){
+            return ResponseEntity.ok("삭제가 완료되었습니다 :) ");
+        }
+
+        return ResponseEntity.status(500).build();
+    }
+
+    @DeleteMapping(path = "/customer/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+        if (id == null || id < 1) {
+            return ResponseEntity.status(400).build();
+        }
+        // 중간에 오류가 났는지 확인 할 수 있는 방법 ?
+        customerService.delete(id);
+
+        return ResponseEntity.ok("삭제가 완료되었습니다 :) ");
+    }
+
 }
