@@ -35,9 +35,9 @@ public class CustomerApi {
         if (customerDTO == null) {
             return ResponseEntity.status(400).build();
         }
-        Customer customer = customerService.save(customerDTO);
+        Long customerId = customerService.save(customerDTO);
 
-        return ResponseEntity.ok(customer.getCustomerId() + "등록이 완료되었습니다 :) ");
+        return ResponseEntity.ok(customerId + "등록이 완료되었습니다 :) ");
     }
 
     @PutMapping(path = "/customer")

@@ -25,9 +25,9 @@ public class CustomerService {
         return CustomerDTO.of(dto.orElseGet(Customer::new));
     }
 
-    public Customer save(CustomerDTO customerDTO) {
-        return customerRepository.save(Customer.of(customerDTO));
-
+    public Long save(CustomerDTO customerDTO) {
+        Customer customer = customerRepository.save(Customer.of(customerDTO));
+        return customer.getCustomerId();
     }
 
     public boolean update(CustomerDTO customerDTO) {
