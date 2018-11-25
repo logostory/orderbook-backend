@@ -15,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -36,7 +37,7 @@ public class CustomerControllerTest {
         //given
         Long customerId = 1L;
         CustomerDTO mockDTO = getMockCustomerDTO();
-        when(service.find(customerId)).thenReturn(mockDTO);
+        given(service.find(customerId)).willReturn(mockDTO);
 
         //when
         ResultActions results = mockMvc.perform(get("/customer/" + customerId)
@@ -69,7 +70,7 @@ public class CustomerControllerTest {
         //given
         CustomerDTO mockDTO = getMockCustomerDTO();
         String json = mapper.writeValueAsString(mockDTO);
-        when(service.save(any())).thenReturn(new Customer());
+        given(service.save(any())).willReturn(new Customer());
 
         //when
         ResultActions results = mockMvc.perform(post("/customer")
@@ -86,7 +87,7 @@ public class CustomerControllerTest {
         //given
         CustomerDTO mockDTO = getMockCustomerDTO();
         String json = mapper.writeValueAsString(mockDTO);
-        when(service.update(any())).thenReturn(true);
+        given(service.update(any())).willReturn(true);
 
         //when
         ResultActions results = mockMvc.perform(put("/customer")
