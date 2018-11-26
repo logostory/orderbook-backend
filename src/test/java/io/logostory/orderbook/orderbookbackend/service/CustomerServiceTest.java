@@ -20,27 +20,28 @@ public class CustomerServiceTest {
 
     @Autowired
     private CustomerService customerService;
+    private Long customerId;
 
 
     @Before
     public void setup(){
-
+        CustomerDTO customerDTO = getMockCustomerDTO();
+        customerId  = customerService.save(customerDTO);
     }
 
-    @Test
-    public void insertTest(){
-        CustomerDTO customerDTO = getMockCustomerDTO();
-        customerService.save(customerDTO);
-        CustomerDTO selectObj = customerService.find(1L);
 
-        //CustomerDTO customerDTO = getMockCustomerDTO();
+    @Test
+    public void updateTest(){
+        // 문제 Insert TC 가 없고, Update 가 insert에 의존되어 있다.
+
+        CustomerDTO selectObj = customerService.find(customerId);
         String updateName = "updateName";
         selectObj.setName(updateName);
 
         customerService.update(selectObj);
-        CustomerDTO customer1 = customerService.find(1L);
 
-        assertThat(customer1.getName(), is(updateName));
+        CustomerDTO actualCustomerDTO = customerService.find(customerId);
+        assertThat(actualCustomerDTO.getName(), is(updateName));
     }
 
     private CustomerDTO getMockCustomerDTO() {
