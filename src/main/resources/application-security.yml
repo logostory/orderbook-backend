@@ -1,0 +1,4 @@
+orderbook-app:
+  client-id: orderbook
+  client-secret: secret
+  resource-id: orderbook-api
