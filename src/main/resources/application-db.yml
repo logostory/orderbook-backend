@@ -22,3 +22,11 @@ spring:
       org:
         hibernate:
           type: debug
+
+# develop env
+---
+spring:
+  profiles: develop
+  jpa:
+    hibernate:
+      ddl-auto: create
