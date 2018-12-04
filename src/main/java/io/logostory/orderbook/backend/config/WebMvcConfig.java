@@ -11,9 +11,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@ComponentScan("io.logostory.orderbook.backend")
-@EnableJpaRepositories("io.logostory.orderbook.backend.repository")
-@EntityScan("io.logostory.orderbook.backend.domain.entity")
 public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
