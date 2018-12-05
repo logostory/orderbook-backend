@@ -12,5 +12,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(
         basePackages = {"io.logostory.orderbook.backend.repository"}
 )
-@EntityScan("io.logostory.orderbook.backend.domain.entity")
+@EntityScan("io.logostory.orderbook.backend.domain")
 public class DataSourceConfig {}
