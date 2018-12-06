@@ -3,6 +3,7 @@ package io.logostory.orderbook.orderbookbackend.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -15,8 +16,6 @@ public class Order {
 
     String name;
 
-
-
     @ManyToOne
     @JoinColumn(name = "seatId")
     Seat seat;
@@ -25,4 +24,8 @@ public class Order {
     @JoinColumn(name = "customerId")
     Customer customer;
 
+    @OneToMany(mappedBy = "orderProductId")
+    List<OrderProduct> products;
+
+    int totalPrice;
 }
