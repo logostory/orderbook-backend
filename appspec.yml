@@ -4,3 +4,13 @@ files:
   - source: /target/*.jar
     destination: /logostory/orderbook
 hooks:
+  AfterInstall:
+    - location: scripts/install_dependencies
+      timeout: 300
+      runas: root
+    - location: scripts/codestar_remote_access
+      timeout: 300
+      runas: root
+    - location: scripts/start_server
+      timeout: 300
+      runas: root
