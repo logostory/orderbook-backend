@@ -2,15 +2,12 @@ version: 0.0
 os: linux
 files:
   - source: /target/*.jar
-    destination: /logostory/orderbook
+    destination: /home/ubuntu
 hooks:
   AfterInstall:
     - location: scripts/install_dependencies
-      timeout: 300
-      runas: root
-    - location: scripts/codestar_remote_access
-      timeout: 300
-      runas: root
+      timeout: 60
+      runas: ubuntu
     - location: scripts/start_server
-      timeout: 300
-      runas: root
+      timeout: 60
+      runas: ubuntu
