@@ -6,13 +6,11 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.VendorExtension;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 
 @Configuration
 @EnableSwagger2
@@ -28,9 +26,12 @@ public class SwaggerConfig {
     }
 
     public ApiInfo apiInfo() {
-
-        Collection<VendorExtension> vendorExtensions = new ArrayList();
-        return new ApiInfo("OrderBook API - logostory 2nd project", "Smart order by mobile in seat", "1.0.0", "temsOfServiceUrl", new Contact("David Sun", "https://logostory.github.io", "torypapa.io@gmail.com"),
-                "lincence", "licenseUrl", vendorExtensions);
+        return new ApiInfo("OrderBook API - logostory 2nd project",
+                "Smart order by mobile in seat",
+                "1.0.0", "temsOfServiceUrl",
+                new Contact("David Sun", "https://logostory.github.io", "torypapa.io@gmail.com"),
+                "lincence",
+                "licenseUrl",
+                Collections.emptyList());
     }
 }
