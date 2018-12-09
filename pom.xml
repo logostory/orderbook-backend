@@ -21,7 +21,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+<<<<<<< Updated upstream
 		<java.version>11</java.version>
+=======
+		<java.version>1.8</java.version>
+>>>>>>> Stashed changes
 		<querydsl.version>4.2.1</querydsl.version>
 	</properties>
 
