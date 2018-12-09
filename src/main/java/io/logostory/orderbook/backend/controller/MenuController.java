@@ -47,9 +47,6 @@ public class MenuController {
     @GetMapping("/{storeId}/menus/{id}")
     public MenuDto findById(@PathVariable Long storeId, @PathVariable Long id) {
 
-
-        //Menu menu = modelMapper.map(categoryDto, Category.class);
-
         return MenuDto.builder()
                 .categoryId(1L)
                 .name("")
