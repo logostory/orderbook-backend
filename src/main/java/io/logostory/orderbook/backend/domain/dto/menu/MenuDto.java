@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MenuDto {
-    @NotEmpty
     private Long categoryId;
     @NotEmpty
     private String name;

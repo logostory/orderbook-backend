@@ -15,9 +15,6 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "order_orderId")
     private Order orderId;
-
     private Long menuId;
 
-    private Long count;
-    private Long menuPrice;
 }
