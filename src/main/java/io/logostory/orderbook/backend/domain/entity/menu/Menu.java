@@ -1,11 +1,12 @@
 package io.logostory.orderbook.backend.domain.entity.menu;
 
 import io.logostory.orderbook.backend.domain.entity.AuditEntity;
+import io.logostory.orderbook.backend.domain.entity.category.Category;
+import io.logostory.orderbook.backend.domain.entity.order.OrderDetail;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,13 +21,16 @@ public class Menu extends AuditEntity {
     @GeneratedValue
     private Long id;
 
-    private Long categoryId;
-
+    @ManyToOne
+    private Category categoryId;
     private String name;
-
     private Long price;
-
     private String imagePath;
-
     private String comment;
+
+    @OneToMany
+    private List<Option> options;
+    @OneToMany
+    private List<OrderDetail> orderDetails;
+
 }

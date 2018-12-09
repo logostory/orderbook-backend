@@ -1,4 +1,9 @@
-package io.logostory.orderbook.backend.domain.dto;
+package io.logostory.orderbook.backend.domain.dto.order;
 
-public class OrderDetailDto {
+import io.logostory.orderbook.backend.domain.entity.order.OrderDetail;
+import lombok.Data;
+
+@Data
+public class OrderDetailDto extends OrderDetail {
+
 }
