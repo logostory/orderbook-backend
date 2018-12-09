@@ -1,6 +1,5 @@
 package io.logostory.orderbook.backend.controller;
 
-<<<<<<< HEAD
 import io.logostory.orderbook.backend.domain.dto.menu.MenuDto;
 import io.logostory.orderbook.backend.domain.entity.menu.Menu;
 import io.logostory.orderbook.backend.domain.entity.menu.Option;
@@ -17,17 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-=======
-import io.logostory.orderbook.backend.domain.entity.Menu;
-import io.logostory.orderbook.backend.repository.MenuRepository;
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
-
->>>>>>> Merge branch 'develop' of https://github.com/logostory/orderbook-backend into eddie
 
 @RestController
 @AllArgsConstructor
@@ -58,9 +46,6 @@ public class MenuController {
 
     @GetMapping("/{storeId}/menus/{id}")
     public MenuDto findById(@PathVariable Long storeId, @PathVariable Long id) {
-
-
-        //Menu menu = modelMapper.map(categoryDto, Category.class);
 
         return MenuDto.builder()
                 .categoryId(1L)
