@@ -1,23 +1,24 @@
-package io.logostory.orderbook.backend.domain.entity.menu;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Entity
 @Builder
-@AllArgsConstructor
 public class Option {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private String name;
+	private Long price;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long optionId;
-    private Long optionPrice;
-    private String optionName;
+	@ManyToOne(optional=false)
+	@JoinColumn(name="menu")
+	private Menu menu;
 }
