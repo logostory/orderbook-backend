@@ -1,36 +1,33 @@
 package io.logostory.orderbook.backend.domain.entity.menu;
 
-import io.logostory.orderbook.backend.domain.entity.AuditEntity;
-import io.logostory.orderbook.backend.domain.entity.category.Category;
-import io.logostory.orderbook.backend.domain.entity.order.OrderDetail;
-import lombok.*;
-
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
-@Getter
-@Setter
-@EqualsAndHashCode(of = "id")
+@Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Menu extends AuditEntity {
+@AllArgsConstructor
+public class Menu {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Long id;
 
-    @ManyToOne
-    private Category categoryId;
-    private String name;
-    private Long price;
-    private String imagePath;
-    private String comment;
-
-    @OneToMany
-    private List<Option> options;
-    @OneToMany
-    private List<OrderDetail> orderDetails;
-
+	String name;
+	String comment;
+ 
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="menu")
+	List<Option> options;
 }
