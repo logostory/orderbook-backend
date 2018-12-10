@@ -1,6 +1,5 @@
 package io.logostory.orderbook.backend.domain.dto.order;
 
-import io.logostory.orderbook.backend.domain.entity.order.OrderDetail;
 import lombok.Data;
 
 import java.util.List;
@@ -8,6 +7,20 @@ import java.util.List;
 @Data
 public class OrderDetailDto {
 
-    private Long menuId;
-    private List<Long> options;
+    Long storeId;
+    Long seatId;
+
+    List<Menus> menus;
+
+    @Data
+    class Menus {
+        Long id;
+        List<Options> options;
+    }
+
+    @Data
+    class Options {
+        Long id;
+    }
+
 }

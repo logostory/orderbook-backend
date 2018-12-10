@@ -9,18 +9,15 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "order")
 public class Order {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long orderId;
-
+    private Long id;
     private Long seatId;
-
     private Long usrId;
-
     private Long totalPrice;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="order")
     private List<OrderDetail> orderDetails;
 }
