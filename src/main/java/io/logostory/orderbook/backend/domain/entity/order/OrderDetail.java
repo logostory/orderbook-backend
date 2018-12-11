@@ -1,6 +1,5 @@
 package io.logostory.orderbook.backend.domain.entity.order;
 
-import io.logostory.orderbook.backend.domain.entity.menu.Menu;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,14 +9,16 @@ import javax.persistence.*;
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long orderDetailId;
+    private Long id;
+
 
     @ManyToOne
     @JoinColumn(name = "order_orderId")
-    private Order orderId;
+    private Order cartId;
 
     private Long menuId;
 
-    private Long count;
-    private Long menuPrice;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="order")
+    private Order order;
 }

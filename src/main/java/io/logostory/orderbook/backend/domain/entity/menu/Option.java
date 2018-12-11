@@ -1,16 +1,19 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+package io.logostory.orderbook.backend.domain.entity.menu;
 
+
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "option")
 public class Option {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

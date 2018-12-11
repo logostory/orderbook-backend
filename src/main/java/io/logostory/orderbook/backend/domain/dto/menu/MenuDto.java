@@ -1,6 +1,5 @@
 package io.logostory.orderbook.backend.domain.dto.menu;
 
-import io.logostory.orderbook.backend.domain.entity.menu.Option;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -20,5 +19,5 @@ public class MenuDto {
     private Long price;
     private String comment;
     private String imagePath;
-    private List<Option> options;
+    private List<OptionDto> options;
 }

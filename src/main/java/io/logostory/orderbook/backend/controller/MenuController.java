@@ -1,12 +1,13 @@
 package io.logostory.orderbook.backend.controller;
 
 import io.logostory.orderbook.backend.domain.dto.menu.MenuDto;
+import io.logostory.orderbook.backend.domain.dto.menu.OptionDto;
 import io.logostory.orderbook.backend.domain.entity.menu.Menu;
-import io.logostory.orderbook.backend.domain.entity.menu.Option;
 import io.logostory.orderbook.backend.repository.CategoryRepository;
 import io.logostory.orderbook.backend.repository.MenuRepository;
 import io.logostory.orderbook.backend.service.MenuService;
 import lombok.AllArgsConstructor;
+import org.h2.util.New;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,7 @@ public class MenuController {
                 .price(1L)
                 .imagePath("http:://imagepath/image.png")
                 .comment("메뉴의 상세 내용을 입력합니다.")
-                .options((List<Option>) Option.builder().optionId(1L).optionName("치즈추가").optionPrice(900L).build()
+                .options((List<OptionDto>) OptionDto.builder().id(1L).name("String").price(1L).build()
                 ).build();
 
         //return this.menuRepository.findById(id);

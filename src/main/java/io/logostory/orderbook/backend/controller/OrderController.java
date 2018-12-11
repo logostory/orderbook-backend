@@ -1,5 +1,6 @@
 package io.logostory.orderbook.backend.controller;
 
+import io.logostory.orderbook.backend.domain.dto.order.OrderDetailDto;
 import io.logostory.orderbook.backend.domain.dto.order.OrderDto;
 import io.logostory.orderbook.backend.repository.OrderDetailRepositoy;
 import io.logostory.orderbook.backend.repository.OrderRepository;
@@ -23,8 +24,7 @@ public class OrderController {
  private ModelMapper modelMapper;
 
  @PostMapping(value = "/orders")
- private  ResponseEntity saveOrder(@RequestBody OrderDto OrderDto) {
-
+ private  ResponseEntity saveOrder(@RequestBody OrderDetailDto orderDetailDto) {
 
      return ResponseEntity.ok(HttpStatus.CREATED);
 
