@@ -1,0 +1,23 @@
+# Password Grant Type 토큰 요청
+POST http://localhost:8080/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic b3JkZXJib29rOnNlY3JldA==
+
+username=test@email.com&password=password&grant_type=password
+###
+
+# check token
+POST http://localhost:8080/oauth/check_token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic b3JkZXJib29rOnNlY3JldA==
+
+token=09ab5a5b-9437-4c4c-ae92-b7f9e2b4e37b
+###
+
+# Refesh Toekn 토큰 요청
+POST http://localhost:8080/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic b3JkZXJib29rOnNlY3JldA==
+
+refresh_token=91d63958-d352-4d44-93d7-14d7ddbbd8dd&grant_type=refresh_token
+###
