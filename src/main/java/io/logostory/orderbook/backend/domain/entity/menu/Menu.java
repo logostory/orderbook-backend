@@ -27,6 +27,7 @@ public class Menu extends AuditEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "shopId")
+	@Setter(AccessLevel.NONE)
 	Shop shop;
 
 	@ManyToOne
@@ -35,4 +36,9 @@ public class Menu extends AuditEntity {
 
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="menu")
 	List<Option> options;
+
+	public Menu setShop(Shop shop) {
+		this.shop = shop;
+		return this;
+	}
 }

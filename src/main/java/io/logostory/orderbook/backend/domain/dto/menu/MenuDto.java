@@ -38,7 +38,7 @@ public class MenuDto {
             menu.setPrice(price);
             menu.setComment(comment);
             menu.setImagePath(imagePath);
-            menu.setOptions(options.stream().map(o -> o.toOption().builder().menu(menu).build()).collect(Collectors.toList()));
+            menu.setOptions(options.stream().map(o -> o.toOption().setMenu(menu)).collect(Collectors.toList()));
             return menu;
         }
 
@@ -52,7 +52,7 @@ public class MenuDto {
         public MenuSearchResultDto(Menu m) {
 
             menuId = m.getMenuId();
-//            categoryId = m.getCategory().getCategoryId();
+            categoryId = m.getCategory().getCategoryId();
             name = m.getMenuName();
             price = m.getPrice();
             comment = m.getComment();

@@ -25,5 +25,11 @@ public class Option extends AuditEntity {
 
 	@ManyToOne(optional=false)
 	@JoinColumn(name="menu")
+	@Setter(AccessLevel.NONE)
 	private Menu menu;
+
+	public Option setMenu(Menu menu) {
+		this.menu = menu;
+		return this;
+	}
 }

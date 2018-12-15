@@ -27,7 +27,7 @@ public class MenuService {
     public List<Menu> addMenuList(Long shopId, List<MenuAddDto> dtos) {
 
         Shop shop = shopRepository.findById(shopId).get();
-        List<Menu> menus = dtos.stream().map(mdto -> mdto.toMenu().builder().shop(shop).build()).collect(Collectors.toList());
+        List<Menu> menus = dtos.stream().map(mdto -> mdto.toMenu().setShop(shop)).collect(Collectors.toList());
         menus = menuRepository.saveAll(menus);
 
         return menus;
