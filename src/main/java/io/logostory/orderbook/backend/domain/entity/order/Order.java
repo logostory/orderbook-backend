@@ -1,23 +1,29 @@
 package io.logostory.orderbook.backend.domain.entity.order;
 
 
-import lombok.Data;
+import lombok.*;
 import org.mapstruct.Mapping;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Setter
+@Getter
 @Entity
-@Table(name = "order")
+@EqualsAndHashCode(of = "orderId")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "`order`")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long orderId;
+
     private Long seatId;
     private Long usrId;
     private Long totalPrice;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="order")
-    private List<OrderDetail> orderDetails;
+    List<Item> items;
 }

@@ -3,22 +3,24 @@ package io.logostory.orderbook.backend.domain.entity.menu;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.logostory.orderbook.backend.domain.entity.AuditEntity;
+import lombok.*;
+
 
 @Entity
-@Data
+@Setter
+@Getter
 @Builder
-@NoArgsConstructor
+@EqualsAndHashCode(of = "optionId")
 @AllArgsConstructor
-@Table(name = "option")
-public class Option {
+@NoArgsConstructor
+@Table(name = "`option`")
+public class Option extends AuditEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private String name;
+	private Long optionId;
+	private String optionName;
 	private Long price;
 
 	@ManyToOne(optional=false)
