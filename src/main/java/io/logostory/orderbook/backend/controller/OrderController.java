@@ -1,8 +1,6 @@
 package io.logostory.orderbook.backend.controller;
 
 import io.logostory.orderbook.backend.domain.dto.order.OrderDetailDto;
-import io.logostory.orderbook.backend.domain.entity.order.OrderDetail;
-import io.logostory.orderbook.backend.repository.OrderDetailRepositoy;
 import io.logostory.orderbook.backend.repository.OrderRepository;
 import lombok.*;
 import org.modelmapper.ModelMapper;
@@ -18,7 +16,6 @@ import javax.persistence.EntityNotFoundException;
 public class OrderController {
 
  private final OrderRepository orderRepository;
- private final OrderDetailRepositoy orderDetailRepositoy;
  private final ModelMapper modelMapper;
 
  @PostMapping(value = "/orders")
@@ -31,9 +28,7 @@ public class OrderController {
  @ExceptionHandler
  @GetMapping(path = "/orders/{orderId}")
  public OrderDetailDto findById(@PathVariable Long orderId) {
-     OrderDetail orderDetail = orderDetailRepositoy.findById(orderId)
-             .orElseThrow(() -> new EntityNotFoundException(String.format("Order[%s] is not found", orderId)));
 
-     return modelMapper.map(orderDetail, OrderDetailDto.class);
+     return null;
  }
 }

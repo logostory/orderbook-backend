@@ -1,6 +1,9 @@
 package io.logostory.orderbook.backend.config;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import io.logostory.orderbook.backend.common.properties.OrderbookAppProperties;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +23,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static com.google.common.base.Predicates.or;
+import static springfox.documentation.builders.RequestHandlerSelectors.basePackage;
+import static springfox.documentation.builders.RequestHandlerSelectors.withClassAnnotation;
+
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
@@ -33,7 +40,7 @@ public class SwaggerConfig {
                 .ignoredParameterTypes(Errors.class)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("io.logostory.orderbook.backend.controller"))
+                .apis(or(withClassAnnotation(Api.class), basePackage("io.logostory.orderbook.backend.controller")))
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(Arrays.asList(securityContext()))

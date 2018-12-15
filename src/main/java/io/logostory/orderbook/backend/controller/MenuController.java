@@ -48,14 +48,17 @@ public class MenuController {
     @GetMapping("/{storeId}/menus/{id}")
     public MenuDto findById(@PathVariable Long storeId, @PathVariable Long id) {
 
-        return MenuDto.builder()
-                .categoryId(1L)
-                .name("")
-                .price(1L)
-                .imagePath("http:://imagepath/image.png")
-                .comment("메뉴의 상세 내용을 입력합니다.")
-                .options((List<OptionDto>) OptionDto.builder().id(1L).name("String").price(1L).build()
-                ).build();
+//        return MenuDto.builder()
+//                .categoryId(1L)
+//                .name("")
+//                .price(1L)
+//                .imagePath("http:://imagepath/image.png")
+//                .comment("메뉴의 상세 내용을 입력합니다.")
+//                .options((List<OptionDto>) OptionDto.builder().id(1L).name("String").price(1L).build()
+//                ).build();
+
+
+        return new MenuDto();
 
         //return this.menuRepository.findById(id);
     }
