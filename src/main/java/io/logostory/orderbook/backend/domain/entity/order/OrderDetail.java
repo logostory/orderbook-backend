@@ -11,12 +11,8 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    @ManyToOne
-    @JoinColumn(name = "order_orderId")
-    private Order cartId;
-
     private Long menuId;
+    private Long price;
 
     @ManyToOne(optional=false)
     @JoinColumn(name="order")

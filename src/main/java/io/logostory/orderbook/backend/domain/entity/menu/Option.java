@@ -1,15 +1,14 @@
 package io.logostory.orderbook.backend.domain.entity.menu;
 
 
-import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,5 +22,6 @@ public class Option {
 
 	@ManyToOne(optional=false)
 	@JoinColumn(name="menu")
+	@JsonIgnore
 	private Menu menu;
 }

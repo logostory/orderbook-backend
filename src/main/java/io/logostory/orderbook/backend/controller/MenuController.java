@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -48,15 +49,7 @@ public class MenuController {
     @GetMapping("/{storeId}/menus/{id}")
     public MenuDto findById(@PathVariable Long storeId, @PathVariable Long id) {
 
-        return MenuDto.builder()
-                .categoryId(1L)
-                .name("")
-                .price(1L)
-                .imagePath("http:://imagepath/image.png")
-                .comment("메뉴의 상세 내용을 입력합니다.")
-                .options((List<OptionDto>) OptionDto.builder().id(1L).name("String").price(1L).build()
-                ).build();
-
-        //return this.menuRepository.findById(id);
+        Optional<Menu> menu = this.menuRepository.findById(id);
+        return modelMapper.map(menu, MenuDto.class);
     }
 }
