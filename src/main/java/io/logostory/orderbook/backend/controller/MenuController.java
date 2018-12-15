@@ -15,9 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -49,7 +49,7 @@ public class MenuController {
     @GetMapping("/{storeId}/menus/{id}")
     public MenuDto findById(@PathVariable Long storeId, @PathVariable Long id) {
 
-        Optional<Menu> menu = this.menuRepository.findById(id);
+         Menu menu =  this.menuRepository.findByShopAndAndMenuId(storeId, id).orElseThrow(()-> new EntityNotFoundException());
         return modelMapper.map(menu, MenuDto.class);
     }
 }
