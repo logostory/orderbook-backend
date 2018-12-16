@@ -1,6 +1,7 @@
 package io.logostory.orderbook.backend.domain.entity.order;
 
 import io.logostory.orderbook.backend.domain.entity.AuditEntity;
+import io.logostory.orderbook.backend.domain.entity.account.Account;
 import io.logostory.orderbook.backend.domain.entity.menu.Menu;
 import lombok.*;
 
@@ -19,6 +20,10 @@ public class Item  extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long itemId;
 
+    private String itemName;
+    private Long price;
+    private String comment;
+
     @ManyToOne
     @JoinColumn(name = "orderId")
     Order order;
@@ -29,4 +34,8 @@ public class Item  extends AuditEntity {
 
     @OneToMany(mappedBy = "item")
     List<ItemOption> itemOptions;
+
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    Account account;
 }
