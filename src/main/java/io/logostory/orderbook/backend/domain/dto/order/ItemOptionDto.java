@@ -10,6 +10,8 @@ import lombok.*;
 @NoArgsConstructor
 public class ItemOptionDto {
 
+    String itemOptionName;
+
     @Data
     public static class ItemOptionAddDto extends  ItemOptionDto {
 
