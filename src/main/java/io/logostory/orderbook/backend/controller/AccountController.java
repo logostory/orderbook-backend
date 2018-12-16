@@ -2,6 +2,7 @@ package io.logostory.orderbook.backend.controller;
 
 import io.logostory.orderbook.backend.domain.dto.account.AccountDto;
 import io.logostory.orderbook.backend.domain.entity.account.Account;
+import io.logostory.orderbook.backend.repository.AccountRepository;
 import io.logostory.orderbook.backend.service.AccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    AccountRepository  accountRepository;
+
     @PostMapping("signup")
     public ResponseEntity create(@RequestBody @Valid AccountDto accountDto,
                                  Errors errors) {
@@ -32,10 +36,13 @@ public class AccountController {
             return ResponseEntity.badRequest().body(errors);
         }
 
-        Account account = modelMapper.map(accountDto, Account.class);
-        accountService.createAccount(account);
-
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        if (! accountRepository.findByUsername(accountDto.getUsername()).isPresent()) {
+            Account account = modelMapper.map(accountDto, Account.class);
+            accountService.createAccount(account);
+            return ResponseEntity.ok(HttpStatus.CREATED);
+        }else {
+            return ResponseEntity.unprocessableEntity().build();
+        }
     }
 
 }
