@@ -1,23 +1,27 @@
 package io.logostory.orderbook.backend.domain.entity.shop;
 
 import io.logostory.orderbook.backend.domain.entity.AuditEntity;
+import io.logostory.orderbook.backend.domain.entity.category.Category;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
 @Builder
+@EqualsAndHashCode(of = "shopId")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Shop extends AuditEntity {
-    @Id
-    @GeneratedValue
-    private Long id;
 
-    private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long shopId;
+
+    private String shopName;
+
+    @OneToMany(mappedBy = "shop")
+    List<Category> categories;
 }

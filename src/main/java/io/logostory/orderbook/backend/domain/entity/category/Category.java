@@ -2,6 +2,7 @@ package io.logostory.orderbook.backend.domain.entity.category;
 
 import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.menu.Menu;
+import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,20 +11,29 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
 @Builder
+@EqualsAndHashCode(of = "categoryId")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Category extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Setter(AccessLevel.NONE)
+    private Long categoryId;
 
-    private String shopId;
+    private String categoryName;
 
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "shopId")
+    @Setter(AccessLevel.NONE)
+    Shop shop;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "category")
     private List<Menu> menus;
+
+    public Category setShop(Shop shop) {
+        this.shop = shop;
+        return this;
+    }
 }

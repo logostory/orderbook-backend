@@ -1,27 +1,35 @@
 package io.logostory.orderbook.backend.domain.entity.menu;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 import javax.persistence.*;
 
+import io.logostory.orderbook.backend.domain.entity.AuditEntity;
+import lombok.*;
+
+
 @Entity
+@Setter
+@Getter
 @Builder
-@NoArgsConstructor
+@EqualsAndHashCode(of = "optionId")
 @AllArgsConstructor
-@Table(name = "option")
-public class Option {
+@NoArgsConstructor
+@Table(name = "`option`")
+public class Option extends AuditEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	private String name;
+	private Long optionId;
+	private String optionName;
 	private Long price;
 
 	@ManyToOne(optional=false)
 	@JoinColumn(name="menu")
-	@JsonIgnore
+	@Setter(AccessLevel.NONE)
 	private Menu menu;
+
+	public Option setMenu(Menu menu) {
+		this.menu = menu;
+		return this;
+	}
 }

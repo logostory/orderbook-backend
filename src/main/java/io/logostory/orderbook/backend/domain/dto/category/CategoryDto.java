@@ -1,5 +1,7 @@
 package io.logostory.orderbook.backend.domain.dto.category;
 
+import io.logostory.orderbook.backend.domain.entity.category.Category;
+import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
@@ -10,9 +12,24 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoryDto {
-    @NotEmpty
-    private Long shopId;
 
-    @NotEmpty
-    private String name;
+    String categoryName;
+
+    public static class CategoryAddDto extends  CategoryDto{
+
+        public Category toCategory() {
+            return Category.builder().categoryName(categoryName).build();
+        }
+    }
+
+    @Data
+    public  static class CategorySearchResultDto extends  CategoryDto {
+
+        Long categoryId;
+
+        public CategorySearchResultDto(Category category) {
+            categoryId = category.getCategoryId();
+            categoryName = category.getCategoryName();
+        }
+    }
 }
