@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "api")
@@ -23,12 +21,5 @@ public class OrderController {
 
      return ResponseEntity.ok(HttpStatus.CREATED);
 
- }
-
- @ExceptionHandler
- @GetMapping(path = "/orders/{orderId}")
- public OrderDetailDto findById(@PathVariable Long orderId) {
-
-     return null;
  }
 }
