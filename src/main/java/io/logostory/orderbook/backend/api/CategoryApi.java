@@ -21,9 +21,7 @@ import java.util.stream.Collectors;
 public class CategoryApi {
 
     private final CategoryRepository categoryRepository;
-
     private final ShopRepository shopRepository;
-
     private final CategoryService categoryService;
 
     @PostMapping(path = "/shops/{shopId}/categories")
