@@ -1,8 +1,8 @@
 package io.logostory.orderbook.backend.controller;
 
-import io.logostory.orderbook.backend.domain.dto.account.AccountDto;
-import io.logostory.orderbook.backend.domain.entity.account.Account;
-import io.logostory.orderbook.backend.service.AccountService;
+import io.logostory.orderbook.backend.domain.dto.category.CategoryDto;
+import io.logostory.orderbook.backend.domain.entity.category.Category;
+import io.logostory.orderbook.backend.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -17,23 +17,21 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "api")
-public class AccountController {
+@RequestMapping(value = "api/category")
+public class CategoryController {
 
     private final ModelMapper modelMapper;
-    private final AccountService accountService;
+    private final CategoryService categoryService;
 
-    @PostMapping("signup")
-    public ResponseEntity create(@RequestBody @Valid AccountDto accountDto,
-                                 Errors errors) {
+    @PostMapping("/register")
+    public ResponseEntity create(@RequestBody @Valid CategoryDto categoryDto, Errors errors) {
         if (errors.hasErrors()) {
             return ResponseEntity.badRequest().body(errors);
         }
 
-        Account account = modelMapper.map(accountDto, Account.class);
-        accountService.createAccount(account);
+        Category category = modelMapper.map(categoryDto, Category.class);
+        categoryService.create(category);
 
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
-
 }
