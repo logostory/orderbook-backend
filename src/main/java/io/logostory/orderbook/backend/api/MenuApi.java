@@ -1,5 +1,6 @@
 package io.logostory.orderbook.backend.api;
 
+import com.google.common.collect.Lists;
 import io.logostory.orderbook.backend.domain.dto.category.CategoryDto;
 import io.logostory.orderbook.backend.domain.dto.menu.MenuDto.*;
 import io.logostory.orderbook.backend.domain.entity.category.Category;
@@ -29,6 +30,13 @@ public class MenuApi {
             @PathVariable Long shopId, @RequestBody List<MenuAddDto> dtos) {
 
         List<Menu> menus = menuService.addMenuList(shopId, dtos);
+        return ResponseEntity.ok( menus.stream().map(m -> new MenuSearchResultDto(m)).collect(Collectors.toList()) );
+    }
+
+    @GetMapping(path = "/shops/{shopId}/menus")
+    public ResponseEntity<List<MenuSearchResultDto>> findMenuList(@PathVariable Long shopId) {
+
+        List<Menu> menus = menuRepository.findMenuListByShopId(shopId);
         return ResponseEntity.ok( menus.stream().map(m -> new MenuSearchResultDto(m)).collect(Collectors.toList()) );
     }
 
