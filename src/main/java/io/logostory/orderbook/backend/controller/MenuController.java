@@ -49,7 +49,7 @@ public class MenuController {
     @GetMapping("/{storeId}/menus/{id}")
     public MenuDto findById(@PathVariable Long storeId, @PathVariable Long id) {
 
-         Menu menu =  this.menuRepository.findByShopAndAndMenuId(storeId, id).orElseThrow(()-> new EntityNotFoundException());
+         Menu menu =  this.menuRepository.findByShopAndMenuId(storeId, id).orElseThrow(()-> new EntityNotFoundException());
         return modelMapper.map(menu, MenuDto.class);
     }
 }

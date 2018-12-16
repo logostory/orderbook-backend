@@ -24,4 +24,7 @@ public class ItemOption {
     @ManyToOne
     @JoinColumn(name = "optionId")
     Option option;
+
+
 }
+

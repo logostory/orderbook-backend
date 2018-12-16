@@ -28,4 +28,13 @@ public class Item {
 
     @OneToMany(mappedBy = "item")
     List<ItemOption> itemOptions;
+
+    public void setItemOptions(List<ItemOption> itemOptions) {
+        this.itemOptions = itemOptions;
+    }
+
+    public void addToItemOptions(ItemOption itemOPtions) {
+        itemOPtions.setItem(this);
+        this.itemOptions.add(itemOPtions);
+    }
 }

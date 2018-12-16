@@ -17,14 +17,14 @@ public class OrderDetailDto {
     List<Menus> menus;
 
     @Data
-    class Menus {
-        Long id;
+    public static class Menus {
+        Long menuId;
         List<Options> options;
     }
 
     @Data
-    class Options {
-        Long id;
+    public static class Options {
+        Long optionId;
     }
 
 }

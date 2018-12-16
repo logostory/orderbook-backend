@@ -20,10 +20,20 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long orderId;
 
+    private Long storeId;
     private Long seatId;
-    private Long usrId;
+    private Long userId;
     private Long totalPrice;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="order")
     List<Item> items;
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public void addToItems(Item item) {
+        item.setOrder(this);
+        this.items.add(item);
+    }
 }
