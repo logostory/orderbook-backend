@@ -14,9 +14,11 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class ItemDto {
 
+    String itemName;
+
 
     @Data
-    public static class ItemAddDto extends  ItemDto {
+    public static class ItemAddDto extends ItemDto {
 
         List<ItemOptionDto.ItemOptionAddDto> itemOptions = new ArrayList<>();
 
