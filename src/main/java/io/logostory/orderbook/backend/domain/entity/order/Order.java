@@ -3,6 +3,7 @@ package io.logostory.orderbook.backend.domain.entity.order;
 
 import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.account.Account;
+import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import lombok.*;
 import org.mapstruct.Mapping;
 
@@ -25,6 +26,10 @@ public class Order extends AuditEntity {
     String seatNumber;
 
     int totalPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "shopId")
+    Shop shop;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="order")
     List<Item> items;
