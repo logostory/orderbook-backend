@@ -24,7 +24,7 @@ public class Option extends AuditEntity {
 	private Long price;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name="menu")
+	@JoinColumn(name="menuId")
 	@Setter(AccessLevel.NONE)
 	private Menu menu;
 
