@@ -17,7 +17,7 @@ public class Account extends AuditEntity {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer accountId;
 
     private String username;
 
