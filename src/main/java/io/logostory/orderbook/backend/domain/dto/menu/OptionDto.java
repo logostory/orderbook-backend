@@ -19,4 +19,17 @@ public class OptionDto {
             return option;
         }
     }
+
+    @Data
+    public static class OptionSearchResultDto extends  OptionDto {
+
+        Long optionId;
+
+        public OptionSearchResultDto(Option o) {
+
+            optionId = o.getOptionId();
+            name  = o.getOptionName();
+            price = o.getPrice();
+        }
+    }
 }
