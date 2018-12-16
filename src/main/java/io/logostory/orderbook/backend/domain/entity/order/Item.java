@@ -1,5 +1,6 @@
 package io.logostory.orderbook.backend.domain.entity.order;
 
+import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.menu.Menu;
 import lombok.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @EqualsAndHashCode(of = "itemId")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Item {
+public class Item  extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

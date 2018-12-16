@@ -1,6 +1,8 @@
 package io.logostory.orderbook.backend.domain.entity.order;
 
 
+import io.logostory.orderbook.backend.domain.entity.AuditEntity;
+import io.logostory.orderbook.backend.domain.entity.account.Account;
 import lombok.*;
 import org.mapstruct.Mapping;
 
@@ -14,26 +16,20 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "`order`")
-public class Order {
+public class Order extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long orderId;
+    Long orderId;
 
-    private Long storeId;
-    private Long seatId;
-    private Long userId;
-    private Long totalPrice;
+    String seatNumber;
+
+    int totalPrice;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="order")
     List<Item> items;
 
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public void addToItems(Item item) {
-        item.setOrder(this);
-        this.items.add(item);
-    }
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    Account account;
 }

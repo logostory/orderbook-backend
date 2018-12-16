@@ -63,7 +63,7 @@ public class SwaggerConfig {
         return SecurityConfigurationBuilder.builder()
                 .clientId(orderbookAppProperties.getClientId())
                 .clientSecret(orderbookAppProperties.getClientSecret())
-                .scopeSeparator(",")
+                .scopeSeparator(" ")
                 .useBasicAuthenticationWithAccessCodeGrant(true)
                 .build();
     }
