@@ -1,16 +1,17 @@
 package io.logostory.orderbook.backend.domain.dto.order;
 
-import io.logostory.orderbook.backend.domain.entity.menu.Menu;
-import io.logostory.orderbook.backend.domain.entity.order.ItemOption;
-import io.logostory.orderbook.backend.domain.entity.order.Order;
+import lombok.*;
 
 import java.util.List;
 
-
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ItemDto {
 
-    Long itemId;
-
-    public
+    Long menuId;
+    List<ItemOptionDto> itemoptions;
 
 }

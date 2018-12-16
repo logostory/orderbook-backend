@@ -2,6 +2,7 @@ package io.logostory.orderbook.backend.domain.entity.order;
 
 import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.menu.Menu;
+import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import lombok.*;
 
 import javax.persistence.*;
@@ -34,8 +35,15 @@ public class Item  extends AuditEntity {
         this.itemOptions = itemOptions;
     }
 
-    public void addToItemOptions(ItemOption itemOPtions) {
-        itemOPtions.setItem(this);
-        this.itemOptions.add(itemOPtions);
+
+    public Item setMenu(Menu menu) {
+        this.menu = menu;
+        return this;
     }
+
+    public Item setOrder(Order Order) {
+        this.order = order;
+        return this;
+    }
+
 }
