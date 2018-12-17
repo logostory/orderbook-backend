@@ -18,6 +18,8 @@ public class ItemOption  extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long itemOptionId;
+    String itemOptionName;
+    Long price;
 
     @ManyToOne
     @JoinColumn(name = "itemId")
