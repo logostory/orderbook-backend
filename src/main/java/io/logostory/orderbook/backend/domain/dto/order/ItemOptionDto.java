@@ -3,29 +3,20 @@ package io.logostory.orderbook.backend.domain.dto.order;
 import io.logostory.orderbook.backend.domain.entity.order.ItemOption;
 import lombok.*;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class ItemOptionDto {
-
-    String itemOptionName;
 
     @Data
     public static class ItemOptionAddDto extends  ItemOptionDto {
 
-
-        public ItemOption toItemOption() {
-
-            ItemOption itemOption = new ItemOption();
-
-            return itemOption;
-        }
+        Long optionId;
     }
 
     @Data
     public static class ItemOptionSearchResultDto extends  ItemOptionDto {
+
+        Long itemOptionId;
+        String itemOptionName;
 
     }
 }

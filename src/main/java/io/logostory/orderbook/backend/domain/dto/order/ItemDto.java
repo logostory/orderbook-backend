@@ -7,32 +7,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class ItemDto {
 
-    String itemName;
+
 
 
     @Data
     public static class ItemAddDto extends ItemDto {
 
-        List<ItemOptionDto.ItemOptionAddDto> itemOptions = new ArrayList<>();
-
-        public Item toItem() {
-
-            Item item = new Item();
-            item.setItemOptions(itemOptions.stream().map(io -> io.toItemOption()).collect(Collectors.toList()));
-
-            return item;
-        }
+        Long menuId;
+        List<ItemOptionDto.ItemOptionAddDto> options = new ArrayList<>();
     }
 
     @Data
     public static class ItemSearchResultDto extends  ItemDto {
+
+        Long itemId;
+        String itemName;
+        String imagePath;
+        Long price;
+        String comment;
 
         public ItemSearchResultDto(Item i) {
 
