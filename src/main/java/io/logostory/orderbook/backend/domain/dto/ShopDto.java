@@ -11,6 +11,7 @@ import lombok.*;
 public class ShopDto {
 
     String shopName;
+    String shopImagePath;
 
     @Setter
     @Getter
@@ -30,6 +31,7 @@ public class ShopDto {
         public ShopSearchResultDto(Shop shop) {
             shopId = shop.getShopId();
             shopName = shop.getShopName();
+            shopImagePath = shop.getShopImagePath();
         }
     }
 }

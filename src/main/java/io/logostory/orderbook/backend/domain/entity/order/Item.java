@@ -20,9 +20,10 @@ public class Item  extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long itemId;
 
-    private String itemName;
-    private Long price;
-    private String comment;
+    String itemName;
+    String imagePath;
+    Long price;
+    String comment;
 
     @ManyToOne
     @JoinColumn(name = "orderId")

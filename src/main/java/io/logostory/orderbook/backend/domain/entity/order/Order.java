@@ -1,6 +1,7 @@
 package io.logostory.orderbook.backend.domain.entity.order;
 
 
+import io.logostory.orderbook.backend.domain.code.OrderStatus;
 import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.account.Account;
 import io.logostory.orderbook.backend.domain.entity.shop.Shop;
@@ -24,8 +25,10 @@ public class Order extends AuditEntity {
     Long orderId;
 
     String seatNumber;
-
     int totalPrice;
+
+    @Enumerated(EnumType.STRING)
+    OrderStatus status = OrderStatus.SAVED;
 
     @ManyToOne
     @JoinColumn(name = "shopId")
