@@ -25,4 +25,11 @@ public class ShopApi {
         shop = shopRepository.save(shop);
         return ResponseEntity.ok(new ShopSearchResultDto(shop));
     }
+
+
+    @GetMapping(path = "/shops/{shopId}")
+    public ResponseEntity<ShopSearchResultDto> findShop(@PathVariable Long shopId) {
+        Shop shop = shopRepository.findById(shopId).get();
+        return ResponseEntity.ok(new ShopSearchResultDto(shop));
+    }
 }

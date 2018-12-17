@@ -18,9 +18,9 @@ public class Shop extends AuditEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long shopId;
-
-    private String shopName;
+    Long shopId;
+    String shopName;
+    String shopImagePath;
 
     @OneToMany(mappedBy = "shop")
     List<Category> categories;
