@@ -1,5 +1,6 @@
 package io.logostory.orderbook.backend.domain.dto.order;
 
+import io.logostory.orderbook.backend.domain.entity.order.ItemOption;
 import lombok.*;
 
 @Getter
@@ -9,6 +10,22 @@ import lombok.*;
 @NoArgsConstructor
 public class ItemOptionDto {
 
-    Long optionId;
+    String itemOptionName;
+
+    @Data
+    public static class ItemOptionAddDto extends  ItemOptionDto {
+
+
+        public ItemOption toItemOption() {
+
+            ItemOption itemOption = new ItemOption();
+
+            return itemOption;
+        }
+    }
+
+    @Data
+    public static class ItemOptionSearchResultDto extends  ItemOptionDto {
 
     }
+}
