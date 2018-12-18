@@ -6,9 +6,9 @@ import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.account.Account;
 import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import lombok.*;
-import org.mapstruct.Mapping;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -35,9 +35,14 @@ public class Order extends AuditEntity {
     Shop shop;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="order")
-    List<Item> items;
+    List<Item> items = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "accountId")
     Account account;
+
+    public void addItem(Item i) {
+        items.add(i);
+        i.setOrder(this);
+    }
 }
