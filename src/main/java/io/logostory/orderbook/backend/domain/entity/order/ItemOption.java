@@ -4,7 +4,6 @@ import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.menu.Option;
 import lombok.*;
 import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 

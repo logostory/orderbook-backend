@@ -3,7 +3,6 @@ package io.logostory.orderbook.backend.service;
 import io.logostory.orderbook.backend.domain.dto.order.ItemDto;
 import io.logostory.orderbook.backend.domain.dto.order.ItemOptionDto;
 import io.logostory.orderbook.backend.domain.dto.order.OrderDto;
-import io.logostory.orderbook.backend.domain.entity.menu.Option;
 import io.logostory.orderbook.backend.domain.entity.order.Item;
 import io.logostory.orderbook.backend.domain.entity.order.ItemOption;
 import io.logostory.orderbook.backend.domain.entity.order.Order;
@@ -13,7 +12,6 @@ import io.logostory.orderbook.backend.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

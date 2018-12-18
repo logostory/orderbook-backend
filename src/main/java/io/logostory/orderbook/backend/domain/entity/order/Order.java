@@ -6,7 +6,6 @@ import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.account.Account;
 import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import lombok.*;
-import org.mapstruct.Mapping;
 
 import javax.persistence.*;
 import java.util.ArrayList;
