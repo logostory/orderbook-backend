@@ -48,6 +48,7 @@ public class MenuDto {
     public static class MenuSearchResultDto extends MenuDto {
 
         Long menuId;
+        private List<OptionDto.OptionSearchResultDto> options;
 
         public MenuSearchResultDto(Menu m) {
 
@@ -57,7 +58,7 @@ public class MenuDto {
             price = m.getPrice();
             comment = m.getComment();
             imagePath = m.getImagePath();
-
+            options = m.getOptions().stream().map(o -> new OptionDto.OptionSearchResultDto(o)).collect(Collectors.toList());
         }
     }
 }

@@ -1,23 +1,20 @@
 package io.logostory.orderbook.backend.service;
 
-import io.logostory.orderbook.backend.domain.dto.menu.MenuDto;
 import io.logostory.orderbook.backend.domain.dto.order.ItemDto;
 import io.logostory.orderbook.backend.domain.dto.order.ItemOptionDto;
 import io.logostory.orderbook.backend.domain.dto.order.OrderDto;
-import io.logostory.orderbook.backend.domain.entity.menu.Menu;
+import io.logostory.orderbook.backend.domain.entity.menu.Option;
 import io.logostory.orderbook.backend.domain.entity.order.Item;
 import io.logostory.orderbook.backend.domain.entity.order.ItemOption;
 import io.logostory.orderbook.backend.domain.entity.order.Order;
-import io.logostory.orderbook.backend.repository.*;
+import io.logostory.orderbook.backend.repository.MenuRepository;
+import io.logostory.orderbook.backend.repository.OptionRepository;
+import io.logostory.orderbook.backend.repository.OrderRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -26,34 +23,35 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final MenuRepository menuRepository;
     private final OptionRepository optionRepository;
-    private final ItemRepository itemRepository;
-    private final ItemOptionRepository itemOptionRepository;
 
-
-    public void saveOrder(OrderDto orderDto) {
-
+    public Order create(OrderDto.OrderAddDto orderAddDto) {
         Order order = new Order();
-        List<Item> itemList = new ArrayList<Item>();
-        List<ItemOption> itemOPtionList = new ArrayList<ItemOption>();
+        Long totalPrice = 0L;
 
-        for(ItemDto items : orderDto.getItems()) {
+        List<ItemDto.ItemAddDto> itemAddList = orderAddDto.getMenus();
+        for (ItemDto.ItemAddDto itemAdd : itemAddList) {
             Item item = new Item();
-            item.setMenu(menuRepository.findById(items.getMenuId()).get());
+            item.setItem(menuRepository.findById(itemAdd.getMenuId()).get());
+            totalPrice += item.getPrice();
 
-            for(ItemOptionDto itemOptions : items.getItemoptions()) {
+            for (ItemOptionDto.ItemOptionAddDto itemOptionAdd :  itemAdd.getOptions()) {
                 ItemOption itemOption = new ItemOption();
-                itemOption.setOption(optionRepository.findById(itemOptions.getOptionId()).get());
+                itemOption.setItemOption(optionRepository.findById(itemOptionAdd.getOptionId()).get());
                 itemOption.setItem(item);
-                itemOPtionList.add(itemOption);
+                item.addItemOption(itemOption);
 
+                totalPrice += itemOption.getItemOptionPrice();
             }
-            item.setItemOptions(itemOPtionList);
             item.setOrder(order);
-            itemList.add(item);
+            order.addItem(item);
 
         }
-        order.setItems(itemList);
+        order.setSeatNumber(orderAddDto.getSeatNumber());
+        order.setTotalPrice((int) (long) totalPrice);
+
         orderRepository.save(order);
+
+        return order;
     }
 
 }

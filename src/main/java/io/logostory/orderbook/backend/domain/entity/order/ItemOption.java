@@ -3,6 +3,7 @@ package io.logostory.orderbook.backend.domain.entity.order;
 import io.logostory.orderbook.backend.domain.entity.AuditEntity;
 import io.logostory.orderbook.backend.domain.entity.menu.Option;
 import lombok.*;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
@@ -18,12 +19,11 @@ public class ItemOption  extends AuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long itemOptionId;
-    String itemOptionName;
-    Long price;
+    Long itemOptionPrice;
 
     @ManyToOne
     @JoinColumn(name = "itemId")
-    @JsonIgnore
+    @JsonBackReference
     Item item;
 
     @ManyToOne
@@ -31,13 +31,8 @@ public class ItemOption  extends AuditEntity {
     Option option;
 
 
-    public ItemOption setItem(Item item) {
-        this.item = item;
-        return this;
-    }
-
-    public ItemOption setOption(Option option) {
-        this.option = option;
+    public ItemOption setItemOption(Option option) {
+        this.itemOptionPrice = option.getPrice();
         return this;
     }
 }

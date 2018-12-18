@@ -1,15 +1,13 @@
 package io.logostory.orderbook.backend.api;
 
-import io.logostory.orderbook.backend.domain.dto.ShopDto;
-import io.logostory.orderbook.backend.domain.dto.order.OrderDto.*;
+import io.logostory.orderbook.backend.domain.dto.order.OrderDto.OrderAddDto;
+import io.logostory.orderbook.backend.domain.dto.order.OrderDto.OrderSearchResultDto;
 import io.logostory.orderbook.backend.domain.entity.order.Order;
-import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import io.logostory.orderbook.backend.repository.OrderRepository;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
 @Api
 @RestController

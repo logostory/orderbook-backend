@@ -1,6 +1,6 @@
 package io.logostory.orderbook.backend.controller;
 
-import io.logostory.orderbook.backend.domain.dto.order.OrderDto;
+import io.logostory.orderbook.backend.domain.dto.order.OrderDto.OrderAddDto;
 import io.logostory.orderbook.backend.repository.OrderRepository;
 import io.logostory.orderbook.backend.service.OrderService;
 import lombok.*;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "api")
 public class OrderController {
 
- OrderService orderService;
+ private final OrderService orderService;
  private final OrderRepository orderRepository;
  private final ModelMapper modelMapper;
 
  @PostMapping(value = "/orders")
- private  ResponseEntity saveOrder(@RequestBody OrderDto orderDto) {
+ private  ResponseEntity create(@RequestBody OrderAddDto dto) {
 
-  orderService.saveOrder(orderDto);
+  orderService.create(dto);
   return ResponseEntity.ok(HttpStatus.CREATED);
  }
 
