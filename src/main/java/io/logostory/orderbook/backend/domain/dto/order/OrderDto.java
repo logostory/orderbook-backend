@@ -34,6 +34,7 @@ public class OrderDto {
 
         public OrderSearchResultDto(Order order) {
 
+            orderId = order.getOrderId();
             seatNumber = order.getSeatNumber();
             items = order.getItems().stream().map(i -> new ItemDto.ItemSearchResultDto(i)).collect(Collectors.toList());
             totalPrice = order.getTotalPrice();

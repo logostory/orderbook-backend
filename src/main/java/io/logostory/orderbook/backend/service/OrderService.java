@@ -6,6 +6,7 @@ import io.logostory.orderbook.backend.domain.dto.order.OrderDto;
 import io.logostory.orderbook.backend.domain.entity.order.Item;
 import io.logostory.orderbook.backend.domain.entity.order.ItemOption;
 import io.logostory.orderbook.backend.domain.entity.order.Order;
+import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import io.logostory.orderbook.backend.repository.MenuRepository;
 import io.logostory.orderbook.backend.repository.OptionRepository;
 import io.logostory.orderbook.backend.repository.OrderRepository;
@@ -22,8 +23,9 @@ public class OrderService {
     private final MenuRepository menuRepository;
     private final OptionRepository optionRepository;
 
-    public Order create(OrderDto.OrderAddDto orderAddDto) {
+    public Order create(Long shopId, OrderDto.OrderAddDto orderAddDto) {
         Order order = new Order();
+        order.setShop(Shop.builder().shopId(shopId).build());
         Long totalPrice = 0L;
 
         List<ItemDto.ItemAddDto> itemAddList = orderAddDto.getMenus();
@@ -47,9 +49,8 @@ public class OrderService {
         order.setSeatNumber(orderAddDto.getSeatNumber());
         order.setTotalPrice((int) (long) totalPrice);
 
-        orderRepository.save(order);
+        order = orderRepository.save(order);
 
         return order;
     }
-
 }

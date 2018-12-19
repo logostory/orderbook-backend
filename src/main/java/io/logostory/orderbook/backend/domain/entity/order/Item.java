@@ -49,12 +49,15 @@ public class Item  extends AuditEntity {
     }
 
     public void addItemOption(ItemOption io) {
-        itemOptions.add(io);
         io.setItem(this);
+        itemOptions.add(io);
     }
 
     public void setItem(Menu menu){
+        this.menu = menu;
         this.itemName = menu.getMenuName();
+        this.imagePath = menu.getImagePath();
+        this.comment = menu.getComment();
         this.price = menu.getPrice();
     }
 }

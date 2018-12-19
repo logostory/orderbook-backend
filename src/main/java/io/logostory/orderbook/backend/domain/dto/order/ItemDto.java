@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class ItemDto {
@@ -27,9 +28,17 @@ public class ItemDto {
         Long price;
         String comment;
 
+        List<ItemOptionDto.ItemOptionSearchResultDto> options = new ArrayList<>();
+
         public ItemSearchResultDto(Item i) {
 
+            itemId = i.getItemId();
+            itemName = i.getItemName();
+            imagePath = i.getImagePath();
+            price = i.getPrice();
+            comment = i.getComment();
 
+            options = i.getItemOptions().stream().map(io -> new ItemOptionDto.ItemOptionSearchResultDto(io)).collect(Collectors.toList());
         }
     }
 }

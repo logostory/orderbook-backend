@@ -19,6 +19,7 @@ public class ItemOption  extends AuditEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long itemOptionId;
     Long itemOptionPrice;
+    String itemOptionName;
 
     @ManyToOne
     @JoinColumn(name = "itemId")
@@ -31,6 +32,8 @@ public class ItemOption  extends AuditEntity {
 
 
     public ItemOption setItemOption(Option option) {
+        this.option = option;
+        this.itemOptionName = option.getOptionName();
         this.itemOptionPrice = option.getPrice();
         return this;
     }
