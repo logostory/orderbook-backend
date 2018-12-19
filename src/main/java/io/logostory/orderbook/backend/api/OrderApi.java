@@ -24,7 +24,7 @@ public class OrderApi {
     @PostMapping(path = "/shops/{shopId}/orders")
     public ResponseEntity<OrderSearchResultDto> addOrder(@PathVariable Long shopId, @RequestBody OrderAddDto dto) {
 
-        Order order = orderService.addOrder(dto);
+        Order order = orderService.create(shopId, dto);
         return ResponseEntity.ok(new OrderSearchResultDto(order));
     }
 

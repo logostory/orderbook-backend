@@ -21,7 +21,8 @@ public class OrderController {
  @PostMapping(value = "/orders")
  private  ResponseEntity create(@RequestBody OrderAddDto dto) {
 
-  orderService.create(dto);
+  long shopId = 0;
+  orderService.create(shopId, dto);
   return ResponseEntity.ok(HttpStatus.CREATED);
  }
 
