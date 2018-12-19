@@ -5,6 +5,7 @@ import io.logostory.orderbook.backend.domain.dto.order.OrderDto.*;
 import io.logostory.orderbook.backend.domain.entity.order.Order;
 import io.logostory.orderbook.backend.domain.entity.shop.Shop;
 import io.logostory.orderbook.backend.repository.OrderRepository;
+import io.logostory.orderbook.backend.service.OrderService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +20,13 @@ public class OrderApi {
     @Autowired
     OrderRepository orderRepository;
 
+    @Autowired
+    OrderService orderService;
+
     @PostMapping(path = "/shops/{shopId}/orders")
     public ResponseEntity<OrderSearchResultDto> addOrder(@PathVariable Long shopId, @RequestBody OrderAddDto dto) {
 
-        Order order = new Order();
-
-
+        Order order = orderService.addOrder(dto);
         return ResponseEntity.ok(new OrderSearchResultDto(order));
     }
 
