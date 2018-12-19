@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -45,21 +46,4 @@ public class MenuController {
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
-    @GetMapping("/{storeId}/menus/{id}")
-    public MenuDto findById(@PathVariable Long storeId, @PathVariable Long id) {
-
-//        return MenuDto.builder()
-//                .categoryId(1L)
-//                .name("")
-//                .price(1L)
-//                .imagePath("http:://imagepath/image.png")
-//                .comment("메뉴의 상세 내용을 입력합니다.")
-//                .options((List<OptionDto>) OptionDto.builder().id(1L).name("String").price(1L).build()
-//                ).build();
-
-
-        return new MenuDto();
-
-        //return this.menuRepository.findById(id);
-    }
 }
